@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 import logging, os
-from conf import settings
+from shop_conf import settings
 
 
 def logger(log_type):  # access or  transaction

@@ -1,8 +1,8 @@
 # -*- encoding:utf-8 -*-
 
-from conf import settings
-from core.db_handler import save_db
-from core import logger
+from shop_conf import settings
+from shop_core.db_handler import save_db
+from shop_core import logger
 
 
 def make_transaction(logger, user_obj, tran_type, amount, **kwargs):
@@ -12,7 +12,7 @@ def make_transaction(logger, user_obj, tran_type, amount, **kwargs):
     :param tran_type: 交易类型
     :param amount: 交易数量
     :param kwargs: mainly for logging usage
-    :return: 
+    :return:
     """
     amount = float(amount)
     if tran_type in settings.TRANSACTION_TYPE:

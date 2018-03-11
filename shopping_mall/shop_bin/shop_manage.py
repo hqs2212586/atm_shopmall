@@ -1,12 +1,12 @@
-
-# 用户操作信用卡
-import os, sys
+# -*- encoding: utf-8 -*-
+# 管理商城用户账号信息
+import sys, os
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# '/Users/huangqiushi/PycharmProjects/atm_shopmall/atm'
 sys.path.append(base_dir)  # 添加到环境变量
 # print(sys.path)
 
-from core import main
+from shop_core import user_manage
+
 if __name__ == '__main__':
-    main.entrance()
+    user_manage.entrance()
