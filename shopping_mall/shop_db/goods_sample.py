@@ -12,5 +12,5 @@ goods_dic = {
     'enroll_date': enroll_date,
     'expire_date': expire_date,
     'status': 0,  # 0 = normal, 1 = locked, 2 = disabled
-    'laset_login_time': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())  # locltime本地时间
+    # 'laset_login_time': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())  # locltime本地时间
 }

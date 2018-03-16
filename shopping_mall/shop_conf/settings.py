@@ -16,7 +16,8 @@ LOG_LEVEL = logging.INFO
 
 LOG_TYPES = {
     'transaction': 'transaction.log',  # 交易日志
-    'access': 'access.log'   # 操作日志
+    'access': 'access.log',   # 操作日志
+    'shop': 'shop.log'  # 商城日志
 }
 
 LOG_PATH = os.path.join(BASE_DIR, 'shop_log')

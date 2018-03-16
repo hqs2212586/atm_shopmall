@@ -3,7 +3,7 @@ import logging, os
 from shop_conf import settings
 
 
-def logger(log_type):  # access or  transaction
+def logger(log_type):  # access or  transaction or shop
     # create logger
     logger = logging.getLogger(log_type)
     logger.setLevel(settings.LOG_LEVEL)

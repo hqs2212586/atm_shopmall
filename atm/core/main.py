@@ -43,7 +43,7 @@ def entrance():
         account = input("\033[32;1m account:\033[0m").strip()
         password = input("\033[32;1m password:\033[0m").strip()
         auth_data = authenticate(account, password)  # 验证
-        if auth_data == 0:   # not None means passed the authentication
+        if auth_data:   # not None means passed the authentication
             # 拿到账户数据 auth_data
             user_obj['is_authenticated'] = True  # 其他函数直接可以通过user_obj就能知道，用户是否登录
             user_obj['data'] = auth_data  # 由None改为账户数据

@@ -5,6 +5,7 @@ from shop_core import db_handler
 from shop_conf import settings
 from shop_core import utils
 from shop_core import logger
+from .logger import logger  # 这样写才能直接调用logger函数
 from shop_core.transaction import make_transaction
 
 # atm下的库
@@ -53,41 +54,41 @@ def shopping():
     while not exit_flag:
         flag = input('是否确认加入购物车？(Y/N)').strip()
         if flag == 'Y':
+            order_form = choice_goods()
+            print(order_form)
             exit_flag = True
         elif flag == 'N':
             exit()
         else:
             utils.print_error('无效输入！')
             continue
-        price = choice_goods()
-    return
 
 
 def choice_goods():
     goods_dic = sales_list()
-    bought_goods_list = []
+    goods_car = []  # 不能用字典会去重
+    goods_price = 0
     exit_flag = False
     while not exit_flag:
         choice_name = input("请输入你要买的商品的名称：【退出：q,检查：c】")
-        for i in goods_dic.keys:
-            if choice_name == i:
-                bought_goods_list.append(choice_name)
-                bought_goods_price = int(goods_dic[choice_name])  # 价格
-                print('\033[1;31;44m%s\033[0m 已经被添加进购物车！' % choice_name)
-                access_logger = logger('access')
-                access_logger.info('%s 已经添加进购物车！！'% choice_name)
-                bought_goods_price += bought_goods_price
-            elif choice_name == 'q':
-                utils.print_info("欢迎再次选购！", bought_goods_list)
-                exit_flag = True
-            elif choice_name == 'c':
-                utils.print_info("购物侧商品清单".center(50, '-'))
-                for i in bought_goods_list: print(i)
-                utils.print_info("商品总价格",bought_goods_price)
-            else:
-                utils.print_error("请输入正确的商品名称！！")
-    goods_car = [bought_goods_list, bought_goods_price]
-    return goods_car
+        if choice_name == 'q':
+            utils.print_info("欢迎再次选购！", goods_car)
+            exit_flag = True
+        elif choice_name == 'c':
+            utils.print_info("购物车商品清单".center(50, '-'))
+            utils.print_info(goods_car)
+            utils.print_info("商品总价格:" + str(goods_price))
+        else:
+            for name,price in goods_dic.items():
+                if choice_name == name:
+                    goods_car.append(choice_name)
+                    goods_price = goods_price + int(price)
+                    print('\033[1;31;44m%s\033[0m 已经被添加进购物车！' % choice_name)
+                    shop_logger = logger('shop')
+                    shop_logger.info('%s 已经添加进购物车！！'% choice_name)
+
+    order_form = {goods_car:goods_price}
+    return order_form
 
 
 def payment(account_data, *args, **kwargs):
